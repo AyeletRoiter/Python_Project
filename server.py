@@ -28,7 +28,7 @@ def home():
             return redirect(url_for('error_login'))
     return render_template('index.html', error=error)
 
-
+# check
 @app.route('/error_login.html')
 def error_login():
     return render_template('error_login.html')
