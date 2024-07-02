@@ -22,7 +22,7 @@ def home():
         username = request.form['username']
         if login_model.is_student(username):
             return redirect(url_for('schedule'))
-        elif login_model.is_teacher(username):
+        elif Login(username):
             return redirect(url_for('teacher_post_task'))
         else:
             return redirect(url_for('error_login'))
