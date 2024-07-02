@@ -20,7 +20,7 @@ def home():
     if request.method == 'POST':
         global username
         username = request.form['username']
-        if login_model.is_student(username):
+        if Login.Is_landLord(username):
             return redirect(url_for('schedule'))
         elif Login(username):
             return redirect(url_for('teacher_post_task'))
