@@ -29,12 +29,12 @@ def home():
             return redirect(url_for('error_login'))
     return render_template('index.html', error=error)
 """
-# check_hjgjg
-@app.route('/error_login.html')
+#The 404 page
+@app.route('/404.html')
 def error_login():
     return render_template('error_login.html')
 
-
+#The about page
 @app.route('/about.html')
 def schedule():
     student_name = username
@@ -46,7 +46,7 @@ def schedule():
     return render_template('schedule.html', week_schedule=data, day=day + 1, hour=hour, date=date,
                            student_class=student_class)
 
-
+#The add-Zimmer page
 app = Flask(__name__)
 @app.route('/add-zimmer', methods=['GET', 'POST'])
 def add_zimmer():
@@ -72,6 +72,7 @@ def add_zimmer():
 
     return render_template('add-Zimmer.html')
 
+#The contact page
 @app.route('/contact.html', methods=['GET', 'POST'])
 def contacts():
     if request.method == 'POST':
@@ -85,17 +86,8 @@ def contacts():
         return redirect(url_for('schedule'))
     return render_template('contacts.html')
 
-
-@app.route('/tasks.html')
-def tasks():
-    global username
-    print(username)
-    tasks = task_model.get_student_tasks_by_name(username)
-    print(tasks)
-    return render_template('tasks.html', tasks=tasks)
-
-
-@app.route('/check')
+#The property-agents page
+@app.route('/property-agents.html')
 def check():
     global username
     is_done = request.args.get("done")
@@ -106,8 +98,8 @@ def check():
         task_model.update_student_task_is_done(task_id, 1, username)
     return tasks()
 
-
-@app.route('/teacher_task.html', methods=['GET', 'POST'])
+#The property-list page
+@app.route('/property-list.html', methods=['GET', 'POST'])
 def teacher_post_task():
     error = None
     if request.method == 'POST':
@@ -122,8 +114,8 @@ def teacher_post_task():
         return redirect(url_for('teacher_post_task'))
     return render_template('teacher_task.html', error=error)
 
-
-@app.route('/teacher_fun_task.html', methods=['GET', 'POST'])
+# The property-type page
+@app.route('/property-type.html', methods=['GET', 'POST'])
 def teacher_post_fun_task():
     error = None
     if request.method == 'POST':
@@ -134,8 +126,8 @@ def teacher_post_fun_task():
         return redirect(url_for('teacher_post_fun_task'))
     return render_template('teacher_fun_task.html', error=error)
 
-
-@app.route('/teacher_schedule.html', methods=['GET', 'POST'])
+#The testimonial page
+@app.route('/testimonial.html', methods=['GET', 'POST'])
 def teacher_post_lesson():
     error = None
     if request.method == 'POST':
