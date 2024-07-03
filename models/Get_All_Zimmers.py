@@ -33,10 +33,3 @@ def get_all_zimers():
     finally:
         conn.close()  # Close the connection when done
 
-# Example usage of the function
-if __name__ == "__main__":
-    zimers = get_all_zimers()
-
-    # Print the retrieved zimers list
-    for zimer in zimers:
-        print(f"Name: {zimer['NameZim']}, Location: {zimer['LocationZim']}, IsPool: {zimer['IsPool']}, IsZacuzzi: {zimer['IsZacuzzi']}, MidweekPrice: {zimer['MidweekPrice']}, Type: {zimer['TypeZim']}, Phone: {zimer['Phone']}")

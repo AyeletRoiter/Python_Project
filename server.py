@@ -8,12 +8,12 @@ app = Flask(__name__, static_url_path='', static_folder='static', template_folde
 
 username = "Shira Levi"
 
-
+# The Home Page
 @app.route('/')
 def root():
     return render_template('index.html')
 
-
+"""
 @app.route('/index.html', methods=['POST', 'GET'])
 def home():
     error = None
@@ -27,7 +27,7 @@ def home():
         else:
             return redirect(url_for('error_login'))
     return render_template('index.html', error=error)
-
+"""
 # check_hjgjg
 @app.route('/error_login.html')
 def error_login():

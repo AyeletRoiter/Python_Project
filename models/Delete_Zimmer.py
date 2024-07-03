@@ -21,6 +21,3 @@ def Delete_Zimmer(NameZim):
     finally:
         conn.close()
 
-
-if __name__ == "__main__":
-    Delete_Zimmer("Zimmer2")

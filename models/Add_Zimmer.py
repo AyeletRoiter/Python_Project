@@ -56,6 +56,3 @@ def Add_Zimmer(NameZim, LocationZim, Area, IsPool, IsJacuzzi, MidweekPrice, EndW
         # Close the connection
         conn.close()
 
-# Example call to the function
-if __name__ == "__main__":
-    Add_Zimmer('Zimmer2', 'Location2', 'Area2', True, True, 500, 1000, 'Type1', 2, 'General', '1234567890', 'LandLord2', 'email@example.com')

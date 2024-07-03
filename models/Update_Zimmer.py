@@ -30,17 +30,3 @@ def Update_Zimmer(NameZim, LocationZim, Area, IsPool, IsJacuzzi, MidweekPrice, E
     finally:
         conn.close()
 
-# Example call to the function
-if __name__ == "__main__":
-    Update_Zimmer(
-        NameZim="Zimmer2",
-        LocationZim="UpdatedLocationZim",
-        Area="UpdatedArea",
-        IsPool=True,
-        IsJacuzzi=True,
-        MidweekPrice=600,
-        EndWeekPrice=1000,
-        TypeZim="UpdatedTypeZim",
-        NumRoom=3,
-        GeneralSpecific="UpdatedGeneralSpecific"
-    )

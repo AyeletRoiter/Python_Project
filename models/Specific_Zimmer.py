@@ -36,10 +36,4 @@ def specific_Zimmer(ZimID):
         conn.close()
 
 
-if __name__ == "__main__":
-    zimers = specific_Zimmer(10)
-
-    # Print the retrieved zimers list
-    for zimer in zimers:
-        print(f"Name: {zimer['NameZim']}, Location: {zimer['LocationZim']}, IsPool: {zimer['IsPool']},  MidweekPrice: {zimer['MidweekPrice']}, Type: {zimer['TypeZim']}, Phone: {zimer['Phone']}")
 

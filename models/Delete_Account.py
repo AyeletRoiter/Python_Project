@@ -39,6 +39,3 @@ def Delete_account(nameLand):
     finally:
         conn.close()
 
-# Example call to the function
-if __name__ == "__main__":
-    Delete_account("LandLord2")

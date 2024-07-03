@@ -15,16 +15,3 @@ def Is_landLord(name_land):
             return True
         return False
 
-# דוגמה לבדיקה של פונקציה
-if __name__ == "__main__":
-    # הגדרת שם לבדיקה
-    landlord_name_to_check = "ליאור"
-
-    # קריאה לפונקציה
-    is_landlord = Is_landLord(landlord_name_to_check)
-
-    # הדפסת התוצאה
-    if is_landlord:
-        print(f"השם {landlord_name_to_check} קיים במערכת")
-    else:
-        print(f"השם {landlord_name_to_check} לא קיים במערכת")
