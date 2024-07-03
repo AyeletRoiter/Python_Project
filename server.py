@@ -65,7 +65,7 @@ def add_zimmer():
         NameLand = request.form['NameLand']
         EmailLand = request.form['EmailLand']
 
-        # הוספת הנתונים לבסיס הנתונים באמצעות הפונקציה במודל
+        # add the variable to the def Add-Zimmer in the 'models' directory
         Add_Zimmer(NameZim, LocationZim, Area, IsPool, IsJacuzzi, MidweekPrice, EndWeekPrice, TypeZim, NumRoom, GeneralSpecific, PhoneLand, NameLand, EmailLand)
 
         return redirect(url_for('add-Zimmer.html'))
