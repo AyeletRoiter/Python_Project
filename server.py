@@ -2,6 +2,7 @@ import datetime
 import smtplib
 from flask import Flask, render_template, request, redirect, url_for
 from models import Add_Zimmer, Delete_Zimmer, Delete_Account, Get_All_Zimmers, Login, Specific_Zimmer, Update_Zimmer
+from .models.Add_Zimmer import Add_Zimmer
 
 
 app = Flask(__name__, static_url_path='', static_folder='static', template_folder='template')
@@ -34,7 +35,7 @@ def error_login():
     return render_template('error_login.html')
 
 
-@app.route('/schedule.html')
+@app.route('/about.html')
 def schedule():
     student_name = username
     student_class = schooluder_model.get_class_by_student(student_name)
@@ -46,40 +47,32 @@ def schedule():
                            student_class=student_class)
 
 
-@app.route('/fun_task.html')
-def about_fun_tasks():
-    student_name = username
-    student_class = schooluder_model.get_class_by_student(student_name)
-    fun_tasks = fun_tasks_model.get_fun_tasks_by_grade(student_class)
-    print(fun_tasks)
-    fun_tasks_1 = fun_tasks[0:int(len(fun_tasks) / 2)]
-    fun_tasks_2 = fun_tasks[int(len(fun_tasks) / 2):len(fun_tasks)]
-    return render_template('fun_task.html', student_class=student_class, fun_tasks=fun_tasks, fun_tasks_1=fun_tasks_1,
-                           fun_tasks_2=fun_tasks_2)
+app = Flask(__name__)
+@app.route('/add-zimmer', methods=['GET', 'POST'])
+def add_zimmer():
+    if request.method == 'POST':
+        NameZim = request.form['NameZim']
+        LocationZim = request.form['LocationZim']
+        Area = request.form['Area']
+        IsPool = 'IsPool' in request.form
+        IsJacuzzi = 'IsJacuzzi' in request.form
+        MidweekPrice = request.form['MidweekPrice']
+        EndWeekPrice = request.form['EndWeekPrice']
+        TypeZim = request.form['TypeZim']
+        NumRoom = request.form['NumRoom']
+        GeneralSpecific = request.form['GeneralSpecific']
+        PhoneLand = request.form['PhoneLand']
+        NameLand = request.form['NameLand']
+        EmailLand = request.form['EmailLand']
 
+        # הוספת הנתונים לבסיס הנתונים באמצעות הפונקציה במודל
+        Add_Zimmer(NameZim, LocationZim, Area, IsPool, IsJacuzzi, MidweekPrice, EndWeekPrice, TypeZim, NumRoom, GeneralSpecific, PhoneLand, NameLand, EmailLand)
 
-def send_email(user, pwd, recipient, subject, body):
-    FROM = user
-    TO = recipient if isinstance(recipient, list) else [recipient]
-    SUBJECT = subject
-    TEXT = body
-    # Prepare actual message
-    message = """From: %s\nTo: %s\nSubject: %s\n\n%s
-    """ % (FROM, ", ".join(TO), SUBJECT, TEXT)
-    try:
-        server = smtplib.SMTP("smtp.gmail.com", 587)
-        server.ehlo()
-        server.starttls()
-        server.login(user, pwd)
-        server.sendmail(FROM, TO, message)
-        server.close()
-        print('successfully sent the mail')
-    except Exception as e:
-        print(e)
-        print("failed to send mail")
+        return redirect(url_for('add-Zimmer.html'))
 
+    return render_template('add-Zimmer.html')
 
-@app.route('/contacts.html', methods=['GET', 'POST'])
+@app.route('/contact.html', methods=['GET', 'POST'])
 def contacts():
     if request.method == 'POST':
         teacher_name = request.form['teacher_name']
