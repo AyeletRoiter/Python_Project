@@ -8,9 +8,9 @@ def get_all_zimers():
         with conn.cursor() as cursor:
             # Query to retrieve all the Zimmers and the phone of the landlord from landlords table by using Join method
             query = """
-            SELECT z.NameZim, z.LocationZim, z.IsPool, z.IsZacuzzi, z.MidweekPrice, z.TypeZim, l.Phone
-            FROM zimers z
-            JOIN landlords l ON z.LandID = l.LandID;
+            SELECT z.NameZim, z.LocationZim, z.IsPool, z.IsJacuzzi, z.MidweekPrice, z.TypeZim, l.PhoneLand, z.IMG
+            FROM Zimmers z
+            JOIN landlords l ON z.LandID = l.LandLordID;
             """
             cursor.execute(query)
             res = cursor.fetchall()
@@ -25,7 +25,8 @@ def get_all_zimers():
                     "IsZacuzzi": row[3],
                     "MidweekPrice": row[4],
                     "TypeZim": row[5],
-                    "Phone": row[6]
+                    "Phone": row[6],
+                    "IMG": row[7]
                 })
 
             return zimers_list

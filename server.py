@@ -1,61 +1,67 @@
-import datetime
-import smtplib
-from flask import Flask, render_template, request, redirect, url_for
-from models import Add_Zimmer, Delete_Zimmer, Delete_Account, Get_All_Zimmers, Login, Specific_Zimmer, Update_Zimmer
-from .models.Add_Zimmer import Add_Zimmer
 
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 
-app = Flask(__name__, static_url_path='', static_folder='static', template_folder='template')
+from models.Add_Zimmer import Add_Zimmer
+from models.Get_All_Zimmers import get_all_zimers
+from models.Login import Is_landLord
 
-username = "Shira Levi"
+app = Flask(__name__, static_url_path='', static_folder='static', template_folder='Template')
+
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
+# Login Page - Route and function
+@app.route('/Login.html')
+def login():
+    return render_template('Login.html')  # Assuming you have a login.html template
+
+# Handling Login Form Submission
+@app.route('/Login.html', methods=['POST'])
+def login_post():
+    name_land = request.form['username']
+    password = request.form['password']
+
+    if Is_landLord(name_land, password):
+        # Store the username in session
+        session['User_name'] = name_land
+        flash('Login successful!', 'success')
+        return redirect(url_for('root'))
+    else:
+        flash('Invalid username or password. Please try again.', 'error')
+        return render_template('Login.html')
 
 # The Home Page
 @app.route('/')
 def root():
-    return render_template('index.html')
+    zimers_list = get_all_zimers()  # קבלת כל הצימרים מה-DB
+    user_name = session.get('User_name', 'Guest')  # מקבל את שם המשתמש מה-session או ברירת מחדל 'Guest'
+    return render_template('index.html', zimers_list=zimers_list, user_name=user_name)
 
-"""
-@app.route('/index.html', methods=['POST', 'GET'])
+@app.route('/index.html')
 def home():
-    error = None
-    if request.method == 'POST':
-        global username
-        username = request.form['username']
-        if Login.Is_landLord(username):
-            return redirect(url_for('schedule'))
-        elif Login(username):
-            return redirect(url_for('teacher_post_task'))
-        else:
-            return redirect(url_for('error_login'))
-    return render_template('index.html', error=error)
-"""
-#The 404 page
-@app.route('/404.html')
-def error_login():
-    return render_template('error_login.html')
+    zimers_list = get_all_zimers()  # קבלת כל הצימרים מה-DB
+    user_name = session.get('User_name', 'Guest')  # מקבל את שם המשתמש מה-session או ברירת מחדל 'Guest'
+    return render_template('index.html', zimers_list=zimers_list, user_name=user_name)
 
-#The about page
+# 404 page
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+# The about page
 @app.route('/about.html')
-def schedule():
-    student_name = username
-    student_class = schooluder_model.get_class_by_student(student_name)
-    data = schooluder_model.get_week_schedule_by_class(student_class)
-    day = datetime.datetime.today().weekday()
-    hour = datetime.datetime.now().hour
-    date = datetime.datetime.today().strftime('%A - %B %d:')
-    return render_template('schedule.html', week_schedule=data, day=day + 1, hour=hour, date=date,
-                           student_class=student_class)
+def page_about():
+    return render_template('about.html')
 
-#The add-Zimmer page
-app = Flask(__name__)
-@app.route('/add-zimmer', methods=['GET', 'POST'])
+# The add-Zimmer page
+@app.route('/add-Zimmer.html', methods=['GET', 'POST'])
 def add_zimmer():
     if request.method == 'POST':
+        # אחסן את הפרמטרים מהבקשה
         NameZim = request.form['NameZim']
         LocationZim = request.form['LocationZim']
         Area = request.form['Area']
-        IsPool = 'IsPool' in request.form
-        IsJacuzzi = 'IsJacuzzi' in request.form
+        IsPool = request.form['IsPool']
+        IsJacuzzi = request.form['IsJacuzzi']
         MidweekPrice = request.form['MidweekPrice']
         EndWeekPrice = request.form['EndWeekPrice']
         TypeZim = request.form['TypeZim']
@@ -64,82 +70,58 @@ def add_zimmer():
         PhoneLand = request.form['PhoneLand']
         NameLand = request.form['NameLand']
         EmailLand = request.form['EmailLand']
+        ImageURL = request.form['ImageURL']
 
-        # add the variable to the def Add-Zimmer in the 'models' directory
+        # קרא לפונקציה להוספת זימר (עדיין לא מוגדרת)
         Add_Zimmer(NameZim, LocationZim, Area, IsPool, IsJacuzzi, MidweekPrice, EndWeekPrice, TypeZim, NumRoom, GeneralSpecific, PhoneLand, NameLand, EmailLand)
 
-        return redirect(url_for('add-Zimmer.html'))
+        return redirect(url_for('root'))
 
     return render_template('add-Zimmer.html')
 
-#The contact page
-@app.route('/contact.html', methods=['GET', 'POST'])
+
+ #The contact page
+@app.route('/contact.html')
 def contacts():
-    if request.method == 'POST':
-        teacher_name = request.form['teacher_name']
-        subject = request.form['subject']
-        msg = request.form['msg']
-        student_mail = request.form['student_mail']
-        password = request.form['password']
-        teacher_email = people_model.get_teacher_email_by_name(teacher_name)
-        send_email(student_mail, password, teacher_email, subject, msg)
-        return redirect(url_for('schedule'))
-    return render_template('contacts.html')
+    return render_template('contact.html')
 
-#The property-agents page
-@app.route('/property-agents.html')
-def check():
-    global username
-    is_done = request.args.get("done")
-    task_id = request.args.get("task_id")
-    if is_done == 'on':  # mean false
-        task_model.update_student_task_is_done(task_id, 0, username)
-    else:  # mean true
-        task_model.update_student_task_is_done(task_id, 1, username)
-    return tasks()
+ #The property-agents page
+@app.route('/property-agent.html')
+def landLords():
+    return render_template('property-agent.html')
 
-#The property-list page
-@app.route('/property-list.html', methods=['GET', 'POST'])
-def teacher_post_task():
-    error = None
-    if request.method == 'POST':
-        grade = request.form['grade']
-        date = request.form['date']
-        date = datetime.datetime.strptime(date, '%Y-%m-%d')
-        day = date.weekday()
-        hour = request.form['hour']
-        subject = request.form['subject']
-        descr = request.form['descr']
-        upload_task_model.insert_task(grade, day, hour, date, descr)
-        return redirect(url_for('teacher_post_task'))
-    return render_template('teacher_task.html', error=error)
 
-# The property-type page
-@app.route('/property-type.html', methods=['GET', 'POST'])
+# The property-list page
+@app.route('/property-list.html', methods=['GET'])
+def property_list():
+    try:
+        zimers = get_all_zimers()
+        print(f"zimers: {zimers}")  # הדפסת הצימרים ללוגים
+        return render_template('property-list.html', zimers_list=zimers)
+    except Exception as e:
+        print(f"Error: {e}")
+        return "Internal Server Error", 500
+
+ # The property-type page
+@app.route('/property-type.html')
 def teacher_post_fun_task():
-    error = None
-    if request.method == 'POST':
-        grade = request.form['grade']
-        descr = request.form['descr']
-        link = request.form['link']
-        upload_fun_task_model.insert_fun_task(grade, descr, link)
-        return redirect(url_for('teacher_post_fun_task'))
-    return render_template('teacher_fun_task.html', error=error)
 
-#The testimonial page
-@app.route('/testimonial.html', methods=['GET', 'POST'])
-def teacher_post_lesson():
-    error = None
-    if request.method == 'POST':
-        grade = request.form['grade']
-        day = request.form['day']
-        hour = request.form['hour']
-        subject = request.form['subject']
-        zoom_link = request.form['zoom_link']
-        schooluder_model.insert_lesson_to_schedule(grade, day, hour, subject, zoom_link)
-        return redirect(url_for('teacher_post_lesson'))
-    return render_template('teacher_schedule.html', error=error)
+     return render_template('property-type.html')
 
+# #The testimonial page
+# @app.route('/testimonial.html', methods=['GET', 'POST'])
+# def teacher_post_lesson():
+#     error = None
+#     if request.method == 'POST':
+#         grade = request.form['grade']
+#         day = request.form['day']
+#         hour = request.form['hour']
+#         subject = request.form['subject']
+#         zoom_link = request.form['zoom_link']
+#         schooluder_model.insert_lesson_to_schedule(grade, day, hour, subject, zoom_link)
+#         return redirect(url_for('teacher_post_lesson'))
+#     return render_template('teacher_schedule.html', error=error)
+#
 
 if __name__ == '__main__':
-    app.run(port=2024)
+    app.run(port=2024, debug=True)

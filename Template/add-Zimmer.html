@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Add Zim Form</title>
+    <title>Zimmer - easy way to find Zimmer</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -41,131 +41,155 @@
         </div>
         <!-- Spinner End -->
 
-        <!-- Navbar Start -->
+
+        <!-- Menu Page -->
         <div class="container-fluid nav-bar bg-transparent">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
-                <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
-                    <div class="icon p-2 me-2">
-                        <img class="img-fluid" src="img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
-                    </div>
-                    <h1 class="m-0 text-primary">Zimmer</h1>
-                </a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" methodes="GET">
+
+                <!--This "a" responsible for the Logo-->
+                    <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
+                        <div class="icon p-2 me-2">
+                            <img class="img-fluid" src="img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
+                        </div>
+                        <h1 class="m-0 text-primary">Zimmer</h1>
+                    </a>
+                <!--close logo =-->
+
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto">
-                        <a href="index.html" class="nav-item nav-link">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="property-list.html" class="dropdown-item">Property List</a>
-                                <a href="property-type.html" class="dropdown-item">Property Type</a>
-                                <a href="property-agent.html" class="dropdown-item">Property Agent</a>
-                            </div>
+                    <!--This div responsible for the link to another page-->
+                        <div class="navbar-nav ms-auto">
+
+                            <!--home link: -->
+                                <a href="index.html" class="nav-item nav-link active">Home</a>
+
+                            <!--about link: -->
+                                <a href="about.html" class="nav-item nav-link">About</a>
+
+                            <!--Zimmer and LandLords links: -->
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">More Details</a>
+                                    <div class="dropdown-menu rounded-0 m-0">
+                                        <a href="property-list.html" class="dropdown-item">All Zimmer</a>
+                                        <a href="property-type.html" class="dropdown-item">Type Zimmer</a>
+                                        <a href="property-agent.html" class="dropdown-item">LandLords</a>
+                                    </div>
+                                </div>
+
+                            <!--div pages-->
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                                    <div class="dropdown-menu rounded-0 m-0">
+                                        <a href="testimonial.html" class="dropdown-item">Customers Respond</a>
+                                        <a href="404.html" class="dropdown-item">404 Error</a>
+                                    </div>
+                                </div>
+
+                            <!--Contact Page-->
+                                <a href="contact.html" class="nav-item nav-link">Contact</a>
+
                         </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Error</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
-                    </div>
-                    <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a>
+                    <!--close the links div-->
+
+                    <!--function to add Zimmer-->
+                    <a href="add-zimmer.html" class="btn btn-primary px-3 d-none d-lg-flex">Add Zimmer</a>
                 </div>
+
             </nav>
         </div>
-        <!-- Navbar End -->
+        <!-- Menu End -->
 
-        <!-- Header Start -->
-        <div class="container-fluid header bg-white p-0">
-            <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
-                <div class="col-md-6 p-5 mt-lg-5">
-                    <h1 class="display-5 animated fadeIn mb-4">Add Zim</h1>
-                    <nav aria-label="breadcrumb animated fadeIn">
-                        <ol class="breadcrumb text-uppercase">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                            <li class="breadcrumb-item text-body active" aria-current="page">Add Zim</li>
-                        </ol>
-                    </nav>
-                </div>
-                <div class="col-md-6 animated fadeIn">
-                    <img class="img-fluid" src="img/header.jpg" alt="">
-                </div>
-            </div>
-        </div>
-        <!-- Header End -->
 
         <!-- Add Zim Form Stat -->
+        <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+    <div class="container">
+        <div class="row g-2">
+            <div class="col-lg-12">
+                <h1 class="display-5 text-white mb-3">Add Zimmer</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
         <div class="container-xxl py-5">
             <div class="container">
-                <div class="row g-5 align-items-center">
+                <div class="row g-5">
                     <div class="col-lg-12">
-                        <h1 class="mb-4">Add Zim Form</h1>
-                        <form action="/add_zim" method="POST">
-                            <div class="mb-3">
-                                <label for="NameZim" class="form-label">NameZim</label>
-                                <input type="text" class="form-control" id="NameZim" name="NameZim" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="LocationZim" class="form-label">LocationZim</label>
-                                <input type="text" class="form-control" id="LocationZim" name="LocationZim" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="Area" class="form-label">Area</label>
-                                <input type="text" class="form-control" id="Area" name="Area" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="IsPool" class="form-label">IsPool</label>
-                                <input type="checkbox" class="form-check-input" id="IsPool" name="IsPool">
-                            </div>
-                            <div class="mb-3">
-                                <label for="IsJacuzzi" class="form-label">IsJacuzzi</label>
-                                <input type="checkbox" class="form-check-input" id="IsJacuzzi" name="IsJacuzzi">
-                            </div>
-                            <div class="mb-3">
-                                <label for="MidweekPrice" class="form-label">MidweekPrice</label>
-                                <input type="number" class="form-control" id="MidweekPrice" name="MidweekPrice" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="EndWeekPrice" class="form-label">EndWeekPrice</label>
-                                <input type="number" class="form-control" id="EndWeekPrice" name="EndWeekPrice" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="TypeZim" class="form-label">TypeZim</label>
-                                <input type="text" class="form-control" id="TypeZim" name="TypeZim" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="NumRoom" class="form-label">NumRoom</label>
-                                <input type="number" class="form-control" id="NumRoom" name="NumRoom" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="GeneralSpecific" class="form-label">GeneralSpecific</label>
-                                <input type="text" class="form-control" id="GeneralSpecific" name="GeneralSpecific" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="PhoneLand" class="form-label">PhoneLand</label>
-                                <input type="text" class="form-control" id="PhoneLand" name="PhoneLand" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="NameLand" class="form-label">NameLand</label>
-                                <input type="text" class="form-control" id="NameLand" name="NameLand" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="EmailLand" class="form-label">EmailLand</label>
-                                <input type="email" class="form-control" id="EmailLand" name="EmailLand" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
+                        <div class="bg-light rounded p-5">
+                            <h1 class="mb-4">Add New Zimmer</h1>
+                            <form action="/add-Zimmer.html" method="POST">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control border-0 py-3" placeholder="NameZim" name="NameZim" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control border-0 py-3" placeholder="LocationZim" name="LocationZim" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select class="form-select border-0 py-3" name="Area" required>
+                                            <option selected disabled>Area</option>
+                                            <option value="North">North</option>
+                                            <option value="South">South</option>
+                                            <option value="Central">Central</option>
+                                            <option value="Coastal Plain">Coastal Plain</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select class="form-select border-0 py-3" name="IsPool" required>
+                                            <option selected disabled>IsPool</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select class="form-select border-0 py-3" name="IsJacuzzi" required>
+                                            <option selected disabled>IsJacuzzi</option>
+                                            <option value="1">Yes</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="number" class="form-control border-0 py-3" placeholder="MidweekPrice" name="MidweekPrice" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="number" class="form-control border-0 py-3" placeholder="EndWeekPrice" name="EndWeekPrice" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control border-0 py-3" placeholder="TypeZim" name="TypeZim" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="number" class="form-control border-0 py-3" placeholder="NumRoom" name="NumRoom" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <textarea class="form-control border-0 py-3" rows="5" placeholder="GeneralSpecific" name="GeneralSpecific" required></textarea>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control border-0 py-3" placeholder="PhoneLand" name="PhoneLand" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control border-0 py-3" placeholder="NameLand" name="NameLand" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="email" class="form-control border-0 py-3" placeholder="EmailLand" name="EmailLand" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="url" class="form-control border-0 py-3" placeholder="Image URL" name="ImageURL" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100 py-3" type="submit">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Add Zim Form End -->
+              <!-- Add Zim Form End -->
+
 
         <!-- Footer Start -->
         <div class="container-fluid bg-dark text-white-50 footer mt-5 pt-5">
