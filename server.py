@@ -34,6 +34,7 @@ def login_post():
 # The Home Page
 @app.route('/', methods=['GET', 'POST'])
 def root():
+    session.pop('User_name', None)
     if request.method == 'POST' and 'logout' in request.form:
         session.pop('User_name', None)
     zimers_list = get_all_zimers()
