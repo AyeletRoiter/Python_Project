@@ -88,7 +88,7 @@
                                 </div>
 
                             <!--Contact Page-->
-                                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                                <a href="account.html" class="nav-item nav-link">account</a>
 
                         </div>
                     <!--close the links div-->
@@ -105,14 +105,20 @@
         <!-- Menu End -->
 
 
-      <!-- Home Page -->
-        <div class="container-fluid header bg-white p-0">
+    <!-- Home Page -->
+<div class="container-fluid header bg-white p-0">
     <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
 
         <!-- This div is responsible for the title of the page-->
         <div class="col-md-6 p-5 mt-lg-5">
             <!-- Greeting with username -->
-            <h2 class="mb-3">Hey {{ user_name }} 👋</h2>
+            <h2 class="mb-3">
+                {% if user_name %}
+                    Hey {{ user_name }} 👋
+                {% else %}
+                    Hey 👋
+                {% endif %}
+            </h2>
             <!-- Title in the Home Page -->
             <h1 class="display-5 animated fadeIn mb-4">Find A <span class="text-primary">Perfect Zimmer</span> vacation with your family</h1>
             <p class="animated fadeIn mb-4 pb-2">
@@ -138,6 +144,7 @@
 
     </div>
 </div>
+
 
 
 

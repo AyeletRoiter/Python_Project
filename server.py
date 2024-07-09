@@ -1,5 +1,5 @@
-
 from flask import Flask, render_template, request, redirect, url_for, flash, session
+from datetime import timedelta
 
 from models.Add_Zimmer import Add_Zimmer
 from models.Get_All_Zimmers import get_all_zimers
@@ -21,10 +21,11 @@ def login_post():
     password = request.form['password']
 
     if Is_landLord(name_land, password):
-        # Store the username in session
+        # Store the username in session and mark it as permanent
         session['User_name'] = name_land
+        session.permanent = True
         flash('Login successful!', 'success')
-        return redirect(url_for('root'))
+        return redirect(url_for('home'))
     else:
         flash('Invalid username or password. Please try again.', 'error')
         return render_template('Login.html')
@@ -32,15 +33,17 @@ def login_post():
 # The Home Page
 @app.route('/')
 def root():
-    zimers_list = get_all_zimers()  # קבלת כל הצימרים מה-DB
-    user_name = session.get('User_name', 'Guest')  # מקבל את שם המשתמש מה-session או ברירת מחדל 'Guest'
+    session.pop('User_name', None)
+    zimers_list = get_all_zimers()
+    user_name = session.get('User_name', None)
     return render_template('index.html', zimers_list=zimers_list, user_name=user_name)
 
 @app.route('/index.html')
 def home():
-    zimers_list = get_all_zimers()  # קבלת כל הצימרים מה-DB
-    user_name = session.get('User_name', 'Guest')  # מקבל את שם המשתמש מה-session או ברירת מחדל 'Guest'
+    zimers_list = get_all_zimers()
+    user_name = session.get('User_name', None)
     return render_template('index.html', zimers_list=zimers_list, user_name=user_name)
+
 
 # 404 page
 @app.errorhandler(404)
@@ -79,17 +82,20 @@ def add_zimmer():
 
     return render_template('add-Zimmer.html')
 
+# The account page
+@app.route('/account.html')
+def account():
+    if 'User_name' in session:
+        user_name = session['User_name']
+        return render_template('account.html', user_name=user_name)
+    else:
+        flash('Please log in to access your account.', 'error')
+        return redirect(url_for('login'))
 
- #The contact page
-@app.route('/contact.html')
-def contacts():
-    return render_template('contact.html')
-
- #The property-agents page
+# The property-agents page
 @app.route('/property-agent.html')
 def landLords():
     return render_template('property-agent.html')
-
 
 # The property-list page
 @app.route('/property-list.html', methods=['GET'])
@@ -102,26 +108,10 @@ def property_list():
         print(f"Error: {e}")
         return "Internal Server Error", 500
 
- # The property-type page
+# The property-type page
 @app.route('/property-type.html')
 def teacher_post_fun_task():
-
-     return render_template('property-type.html')
-
-# #The testimonial page
-# @app.route('/testimonial.html', methods=['GET', 'POST'])
-# def teacher_post_lesson():
-#     error = None
-#     if request.method == 'POST':
-#         grade = request.form['grade']
-#         day = request.form['day']
-#         hour = request.form['hour']
-#         subject = request.form['subject']
-#         zoom_link = request.form['zoom_link']
-#         schooluder_model.insert_lesson_to_schedule(grade, day, hour, subject, zoom_link)
-#         return redirect(url_for('teacher_post_lesson'))
-#     return render_template('teacher_schedule.html', error=error)
-#
+    return render_template('property-type.html')
 
 if __name__ == '__main__':
     app.run(port=2024, debug=True)
