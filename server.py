@@ -3,6 +3,7 @@ from datetime import timedelta
 
 from models.Add_Zimmer import Add_Zimmer
 from models.Get_All_Zimmers import get_all_zimers
+from models.Get_Zimmer_by_Land_name import get_all_zimers_by_land_name
 from models.Login import Is_landLord
 
 app = Flask(__name__, static_url_path='', static_folder='static', template_folder='Template')
@@ -31,13 +32,13 @@ def login_post():
         return render_template('Login.html')
 
 # The Home Page
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def root():
-    session.pop('User_name', None)
+    if request.method == 'POST' and 'logout' in request.form:
+        session.pop('User_name', None)
     zimers_list = get_all_zimers()
     user_name = session.get('User_name', None)
     return render_template('index.html', zimers_list=zimers_list, user_name=user_name)
-
 @app.route('/index.html')
 def home():
     zimers_list = get_all_zimers()
@@ -83,11 +84,12 @@ def add_zimmer():
     return render_template('add-Zimmer.html')
 
 # The account page
-@app.route('/account.html')
+@app.route('/account.html', methods=['GET'])
 def account():
     if 'User_name' in session:
         user_name = session['User_name']
-        return render_template('account.html', user_name=user_name)
+        user_zimers = get_all_zimers_by_land_name(user_name)
+        return render_template('account.html', user_name=user_name, user_zimers=user_zimers)
     else:
         flash('Please log in to access your account.', 'error')
         return redirect(url_for('login'))
