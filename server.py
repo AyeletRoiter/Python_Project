@@ -6,6 +6,7 @@ from models.Delete_Zimmer import Delete_Zimmer
 from models.Get_All_Zimmers import get_all_zimers
 from models.Get_Zimmer_by_Land_name import get_all_zimers_by_land_name
 from models.Login import Is_landLord
+from models.Update_Zimmer import Update_Zimmer
 
 app = Flask(__name__, static_url_path='', static_folder='static', template_folder='Template')
 
@@ -109,16 +110,29 @@ def account():
             flash('Please log in to delete a Zimmer.', 'error')
         return redirect(url_for('account'))
 
-@app.route('/update_zimmer/<zimmer_name>', methods=['GET', 'POST'])
-def update_zimmer(zimmer_name):
-    # כאן נוכל לכתוב את הקוד לעדכון הצימר
+
+@app.route('/Update.html', methods=['GET', 'POST'])
+def update_zimmer():
     if request.method == 'POST':
-        # קבל את הנתונים המעודכנים מהטופס ויישם את הלוגיקה לעדכון
-        pass
-    else:
-        # הצג את הטופס עם הנתונים הנוכחיים של הצימר
-        pass
-    return render_template('update_zimmer.html', zimmer_name=zimmer_name)
+        NameZim = request.form['NameZim']
+        LocationZim = request.form['LocationZim']
+        Area = request.form['Area']
+        IsPool = request.form['IsPool']
+        IsJacuzzi = request.form['IsJacuzzi']
+        MidweekPrice = request.form['MidweekPrice']
+        EndWeekPrice = request.form['EndWeekPrice']
+        TypeZim = request.form['TypeZim']
+        NumRoom = request.form['NumRoom']
+        GeneralSpecific = request.form['GeneralSpecific']
+        ImageURL = request.form['ImageURL']
+        NameZimmer = request.form['NameZimmer']
+
+        Update_Zimmer(NameZim, LocationZim, Area, IsPool, IsJacuzzi, MidweekPrice, EndWeekPrice, TypeZim, NumRoom, GeneralSpecific, ImageURL, NameZimmer)
+
+        return redirect(url_for('account'))
+
+    return render_template('Update.html')
+
 
 # The property-agents page
 @app.route('/property-agent.html')

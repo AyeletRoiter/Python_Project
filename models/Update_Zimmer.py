@@ -1,6 +1,6 @@
 from models.config import connection
 
-def Update_Zimmer(NameZim, LocationZim, Area, IsPool, IsJacuzzi, MidweekPrice, EndWeekPrice, TypeZim, NumRoom, GeneralSpecific):
+def Update_Zimmer(NameZim, LocationZim, Area, IsPool, IsJacuzzi, MidweekPrice, EndWeekPrice, TypeZim, NumRoom, GeneralSpecific, IMG, NameZimmer):
     conn = connection()
     try:
         with conn.cursor() as cursor:
@@ -16,11 +16,14 @@ def Update_Zimmer(NameZim, LocationZim, Area, IsPool, IsJacuzzi, MidweekPrice, E
                     EndWeekPrice = ?,
                     TypeZim = ?,
                     NumRoom = ?,
-                    GeneralSpecific = ?
+                    GeneralSpecific = ?,
+                    IMG = ?
                 WHERE
                     NameZim = ?
             """
-            cursor.execute(query, (NameZim, LocationZim, Area, IsPool, IsJacuzzi, MidweekPrice, EndWeekPrice, TypeZim, NumRoom, GeneralSpecific, NameZim))
+            print("Executing query with values:")
+            print(NameZim, LocationZim, Area, IsPool, IsJacuzzi, MidweekPrice, EndWeekPrice, TypeZim, NumRoom, GeneralSpecific, IMG)
+            cursor.execute(query, (NameZim, LocationZim, Area, IsPool, IsJacuzzi, MidweekPrice, EndWeekPrice, TypeZim, NumRoom, GeneralSpecific, IMG, NameZimmer))
             conn.commit()
             print("The Zimmer updated successfully!")
 
@@ -29,4 +32,3 @@ def Update_Zimmer(NameZim, LocationZim, Area, IsPool, IsJacuzzi, MidweekPrice, E
 
     finally:
         conn.close()
-
