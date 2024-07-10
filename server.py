@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from datetime import timedelta
 
 from models.Add_Zimmer import Add_Zimmer
+from models.Delete_Zimmer import Delete_Zimmer
 from models.Get_All_Zimmers import get_all_zimers
 from models.Get_Zimmer_by_Land_name import get_all_zimers_by_land_name
 from models.Login import Is_landLord
@@ -40,6 +41,7 @@ def root():
     zimers_list = get_all_zimers()
     user_name = session.get('User_name', None)
     return render_template('index.html', zimers_list=zimers_list, user_name=user_name)
+
 @app.route('/index.html')
 def home():
     zimers_list = get_all_zimers()
@@ -85,15 +87,38 @@ def add_zimmer():
     return render_template('add-Zimmer.html')
 
 # The account page
-@app.route('/account.html', methods=['GET'])
+@app.route('/account.html', methods=['GET', 'POST'])
 def account():
-    if 'User_name' in session:
-        user_name = session['User_name']
-        user_zimers = get_all_zimers_by_land_name(user_name)
-        return render_template('account.html', user_name=user_name, user_zimers=user_zimers)
+    if request.method == 'GET':
+        if 'User_name' in session:
+            user_name = session['User_name']
+            user_zimers = get_all_zimers_by_land_name(user_name)
+            return render_template('account.html', user_name=user_name, user_zimers=user_zimers)
+        else:
+            flash('Please log in to access your account.', 'error')
+            return redirect(url_for('login'))
     else:
-        flash('Please log in to access your account.', 'error')
-        return redirect(url_for('login'))
+        if 'User_name' in session:
+            zimmer_name = request.form.get('zimmer_name')
+            if zimmer_name:
+                Delete_Zimmer(zimmer_name)
+                flash('Zimmer deleted successfully!', 'success')
+            else:
+                flash('Zimmer name not provided.', 'error')
+        else:
+            flash('Please log in to delete a Zimmer.', 'error')
+        return redirect(url_for('account'))
+
+@app.route('/update_zimmer/<zimmer_name>', methods=['GET', 'POST'])
+def update_zimmer(zimmer_name):
+    # כאן נוכל לכתוב את הקוד לעדכון הצימר
+    if request.method == 'POST':
+        # קבל את הנתונים המעודכנים מהטופס ויישם את הלוגיקה לעדכון
+        pass
+    else:
+        # הצג את הטופס עם הנתונים הנוכחיים של הצימר
+        pass
+    return render_template('update_zimmer.html', zimmer_name=zimmer_name)
 
 # The property-agents page
 @app.route('/property-agent.html')
