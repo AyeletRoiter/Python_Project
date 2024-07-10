@@ -1,6 +1,5 @@
 from models.config import connection
 
-
 def Delete_Zimmer(NameZim):
     conn = connection()
     try:
