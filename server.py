@@ -7,7 +7,8 @@ from models.Get_Zimmer_by_Land_name import get_all_zimers_by_land_name
 from models.Login import Is_landLord
 from models.Specific_Zimmer import specific_Zimmer
 from models.Update_Zimmer import Update_Zimmer
-from models.sorting_functions import sort_by_name_zim, sort_by_Location, sort_by_price_asc, sort_by_price_desc
+from models.sorting_functions.sorting_Zimmers import sort_by_name_zim, sort_by_Location, sort_by_price_asc, sort_by_price_desc
+from models.sorting_functions.sorting_landlords import sort_by_name_Land, sort_by_Phone_Land
 
 app = Flask(__name__, static_url_path='', static_folder='static', template_folder='Template')
 
@@ -138,8 +139,23 @@ def update_zimmer():
 # The property-agents page
 @app.route('/property-agent.html')
 def landLords():
-    LandLords = get_LandLords()
-    return render_template('property-agent.html', Land_list=LandLords)
+    try:
+        name_Land = request.args.get('nameLand')
+        Phone_Land = request.args.get('PhoneLand')
+
+        if name_Land:
+            LandLords = sort_by_name_Land(name_Land)
+        elif Phone_Land:
+            LandLords = sort_by_Phone_Land(Phone_Land)
+        else:
+            LandLords = get_LandLords()
+
+        return render_template('property-agent.html', Land_list=LandLords)
+    except Exception as e:
+        print(f"Error: {e}")
+        return "An error occurred", 500
+
+
 
 # The property-list page
 @app.route('/property-list.html', methods=['GET'])
