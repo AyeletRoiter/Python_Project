@@ -1,12 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
-from datetime import timedelta
-
 from models.Add_Zimmer import Add_Zimmer
 from models.Delete_Zimmer import Delete_Zimmer
 from models.Get_All_Zimmers import get_all_zimers
+from models.Get_LandLords import get_LandLords
 from models.Get_Zimmer_by_Land_name import get_all_zimers_by_land_name
 from models.Login import Is_landLord
+from models.Specific_Zimmer import specific_Zimmer
 from models.Update_Zimmer import Update_Zimmer
+from models.sorting_functions import sort_by_name_zim, sort_by_Location, sort_by_price_asc, sort_by_price_desc
 
 app = Flask(__name__, static_url_path='', static_folder='static', template_folder='Template')
 
@@ -64,7 +65,7 @@ def page_about():
 @app.route('/add-Zimmer.html', methods=['GET', 'POST'])
 def add_zimmer():
     if request.method == 'POST':
-        # אחסן את הפרמטרים מהבקשה
+
         NameZim = request.form['NameZim']
         LocationZim = request.form['LocationZim']
         Area = request.form['Area']
@@ -80,7 +81,7 @@ def add_zimmer():
         EmailLand = request.form['EmailLand']
         ImageURL = request.form['ImageURL']
 
-        # קרא לפונקציה להוספת זימר (עדיין לא מוגדרת)
+
         Add_Zimmer(NameZim, LocationZim, Area, IsPool, IsJacuzzi, MidweekPrice, EndWeekPrice, TypeZim, NumRoom, GeneralSpecific, PhoneLand, NameLand, EmailLand)
 
         return redirect(url_for('root'))
@@ -137,18 +138,47 @@ def update_zimmer():
 # The property-agents page
 @app.route('/property-agent.html')
 def landLords():
-    return render_template('property-agent.html')
+    LandLords = get_LandLords()
+    return render_template('property-agent.html', Land_list=LandLords)
 
 # The property-list page
 @app.route('/property-list.html', methods=['GET'])
 def property_list():
     try:
-        zimers = get_all_zimers()
+        name_zim = request.args.get('nameZim')
+        area = request.args.get('area')
+        price_order = request.args.get('priceOrder')
+
+        if name_zim:
+            zimers = sort_by_name_zim(name_zim)
+        elif area and area != "choose Area":
+            zimers = sort_by_Location(area)
+        elif price_order and price_order != "search by price":
+            if price_order == 'asc':
+                zimers = sort_by_price_asc()
+            else:
+                zimers = sort_by_price_desc()
+        else:
+            zimers = get_all_zimers()
+
         print(f"zimers: {zimers}")  # הדפסת הצימרים ללוגים
         return render_template('property-list.html', zimers_list=zimers)
     except Exception as e:
         print(f"Error: {e}")
-        return "Internal Server Error", 500
+        return "An error occurred", 500
+
+@app.route('/zimmer/<int:id>', methods=['GET'])
+def Specific_Zimmer_By_ID(id):
+    try:
+        zimer = specific_Zimmer(id)  # פונקציה שתשלוף את הצימר מהמסד נתונים לפי id
+        if zimer:
+            return render_template('Specific_Zimmer.html', zimer=zimer)
+        else:
+            return "Zimmer not found", 404
+    except Exception as e:
+        print(f"Error: {e}")
+        return "An error occurred", 500
+
 
 # The property-type page
 @app.route('/property-type.html')
