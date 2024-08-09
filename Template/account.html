@@ -41,47 +41,41 @@
         </div>
         <!-- Spinner End -->
 
-        <!-- Menu Start -->
+        <!-- Menu Page -->
         <div class="container-fluid nav-bar bg-transparent">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
-                <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
-                    <div class="icon p-2 me-2">
-                        <img class="img-fluid" src="img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
-                    </div>
-                    <h1 class="m-0 text-primary">B&B</h1>
-                </a>
+
+                <!--This "a" responsible for the Logo-->
+                    <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
+                        <div class="icon p-2 me-2">
+                            <img class="img-fluid" src="img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
+                        </div>
+                        <h1 class="m-0 text-primary">B&B</h1>
+                    </a>
+                <!--close logo =-->
+
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav ms-auto">
-                        <a href="index.html" class="nav-item nav-link">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">More Details</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="property-list.html" class="dropdown-item">All Zimmer</a>
-                                <a href="property-type.html" class="dropdown-item">Type Zimmer</a>
-                                <a href="property-agent.html" class="dropdown-item">LandLords</a>
-                            </div>
+                    <!--This div responsible for the link to another page-->
+                        <div class="navbar-nav ms-auto">
+                                <a href="index.html" class="nav-item nav-link">Home</a>
+                                <a href="about.html" class="nav-item nav-link ">About</a>
+                                <a href="property-list.html" class="nav-item nav-link">Zimmer</a>
+                                <a href="property-agent.html" class="nav-item nav-link">LandLords</a>
+                                <a href="testimonial.html" class="nav-item nav-link">Ratings</a>
+                                <a href="account.html" class="nav-item nav-link active">account</a>
                         </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="testimonial.html" class="dropdown-item">Customers Respond</a>
-                                <a href="404.html" class="dropdown-item">404 Error</a>
-                            </div>
-                        </div>
-                        <a href="account.html" class="nav-item nav-link active">Account</a>
-                    </div>
-                    <a href="add-Zimmer.html" class="btn btn-primary px-3 d-none d-lg-flex">Add Zimmer</a>
-                    <!-- Add this form in the HTML -->
-                    <form id="logout-form" action="/" method="POST" style="display: none;">
-                        <input type="hidden" name="logout" value="1">
-                    </form>
+                    <!--close the links div-->
 
-                    <a href="#" class="btn btn-outline-primary px-3 mx-2 d-none d-lg-flex" onclick="document.getElementById('logout-form').submit();">Logout</a>
+                        <a href="add-Zimmer.html" class="btn btn-primary px-3 d-none d-lg-flex">Add Zimmer</a>
+
+                        <!-- Link to Login Page -->
+                        <a href="Login.html" class="btn btn-outline-primary px-3 mx-2 d-none d-lg-flex">Login</a>
+
                 </div>
+
             </nav>
         </div>
         <!-- Menu End -->

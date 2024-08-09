@@ -60,7 +60,10 @@ def page_not_found(e):
 # The about page
 @app.route('/about.html')
 def page_about():
-    return render_template('about.html')
+    LandLords = get_LandLords()
+
+    return render_template('about.html', Land_list=LandLords)
+
 
 # The add-Zimmer page
 @app.route('/add-Zimmer.html', methods=['GET', 'POST'])

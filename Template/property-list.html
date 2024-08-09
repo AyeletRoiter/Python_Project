@@ -41,7 +41,7 @@
         </div>
         <!-- Spinner End -->
 
-        <!-- Menu Page -->
+         <!-- Menu Page -->
         <div class="container-fluid nav-bar bg-transparent">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
 
@@ -60,39 +60,20 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <!--This div responsible for the link to another page-->
                         <div class="navbar-nav ms-auto">
-
-                            <!--home link: -->
-                                <a href="index.html" class="nav-item nav-link active">Home</a>
-
-                            <!--about link: -->
-                                <a href="about.html" class="nav-item nav-link">About</a>
-
-                            <!--Zimmer and LandLords links: -->
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">More Details</a>
-                                    <div class="dropdown-menu rounded-0 m-0">
-                                        <a href="property-list.html" class="dropdown-item">All Zimmer</a>
-                                        <a href="property-type.html" class="dropdown-item">Type Zimmer</a>
-                                        <a href="property-agent.html" class="dropdown-item">LandLords</a>
-                                    </div>
-                                </div>
-
-                            <!--div pages-->
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                                    <div class="dropdown-menu rounded-0 m-0">
-                                        <a href="testimonial.html" class="dropdown-item">Customers Respond</a>
-                                    </div>
-                                </div>
-
-                            <!--Contact Page-->
+                                <a href="index.html" class="nav-item nav-link">Home</a>
+                                <a href="about.html" class="nav-item nav-link ">About</a>
+                                <a href="property-list.html" class="nav-item nav-link active">Zimmer</a>
+                                <a href="property-agent.html" class="nav-item nav-link">LandLords</a>
+                                <a href="testimonial.html" class="nav-item nav-link">Ratings</a>
                                 <a href="account.html" class="nav-item nav-link">account</a>
-
                         </div>
                     <!--close the links div-->
 
-                    <!--function to add Zimmer-->
-                    <a href="add-zimmer.html" class="btn btn-primary px-3 d-none d-lg-flex">Add Zimmer</a>
+                        <a href="add-Zimmer.html" class="btn btn-primary px-3 d-none d-lg-flex">Add Zimmer</a>
+
+                        <!-- Link to Login Page -->
+                        <a href="Login.html" class="btn btn-outline-primary px-3 mx-2 d-none d-lg-flex">Login</a>
+
                 </div>
 
             </nav>
@@ -100,34 +81,22 @@
         <!-- Menu End -->
 
 
-        <!-- Header Start -->
-        <div class="container-fluid header bg-white p-0">
-            <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
-                <div class="col-md-6 p-5 mt-lg-5">
-                    <h1 class="display-5 animated fadeIn mb-4">All Zimmer</h1>
-                        <nav aria-label="breadcrumb animated fadeIn">
-                        <ol class="breadcrumb text-uppercase">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                            <li class="breadcrumb-item text-body active" aria-current="page">All Zimmer</li>
-                        </ol>
-                    </nav>
-                </div>
-                <div class="col-md-6 animated fadeIn">
-                    <img class="img-fluid" src="img/header.jpg" alt="">
-                </div>
-            </div>
-        </div>
-        <!-- Header End -->
 
 
-        <!-- Search Start -->
-        <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+
+        <!-- Property List Start -->
+        <div class="container-xxl py-5">
             <div class="container">
-                <form method="GET" action="/property-list.html">
-                    <div class="row g-2">
-                        <div class="col-md-10">
-                            <div class="row g-2">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                        <h1 class="mb-3">All our B&Bs</h1>
+                        <p>Here you can see all the B&Bs in the easy way</p>
+                    </div>
+
+                <!-- Search Start -->
+                <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 20px;">
+                    <div class="container">
+                        <form method="GET" action="/property-list.html">
+                            <div class="row g-2 d-flex align-items-center">
                                 <div class="col-md-4">
                                     <input type="text" name="nameZim" class="form-control border-0 py-3" placeholder="Search by name">
                                 </div>
@@ -142,73 +111,61 @@
                                         <option value="Eilat">Eilat</option>
                                     </select>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <select name="priceOrder" class="form-select border-0 py-3">
                                         <option selected>search by price</option>
                                         <option value="asc">low to high</option>
                                         <option value="desc">high to low</option>
                                     </select>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <button type="submit" class="btn btn-dark border-0 w-100 py-3">Search</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <!-- Search End -->
-
-
-
-<!-- Property List Start -->
-<div class="container-xxl py-5">
-    <div class="container">
-        <div class="tab-content">
-            <div id="tab-1" class="tab-pane fade show p-0 active">
-                <div class="row g-4">
-                    {% for zimer in zimers_list %}
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="property-item rounded overflow-hidden">
-                            <div class="position-relative overflow-hidden" style="width: 100%; height: 200px;">
-                                <a href="/zimmer/{{ zimer.id }}">
-                                    <img class="img-fluid" src="{{ zimer.IMG }}" alt="{{ zimer.NameZim }}" style="width: 100%; height: 100%; object-fit: cover;">
-                                </a>
-                                <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">
-                                    {{ zimer.TypeZim }}
+                                <div class="col-md-1">
+                                    <button type="submit" class="btn btn-dark w-100 py-3">Search</button>
                                 </div>
                             </div>
-                            <div class="p-4 pb-0">
-                                <h5 class="text-primary mb-3">${{ zimer.MidweekPrice }}</h5>
-                                <a class="d-block h5 mb-2" href="/zimmer/{{ zimer.id }}">{{ zimer.NameZim }}</a>
-                                <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ zimer.LocationZim }}</p>
+                        </form>
+                    </div>
+                </div>
+                <!-- Search End -->
+
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane fade show p-0 active">
+                        <div class="row g-4">
+                            {% for zimer in zimers_list %}
+                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="property-item rounded overflow-hidden">
+                                    <div class="position-relative overflow-hidden" style="width: 100%; height: 200px;">
+                                        <a href="/zimmer/{{ zimer.id }}">
+                                            <img class="img-fluid" src="{{ zimer.IMG }}" alt="{{ zimer.NameZim }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                        </a>
+                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">
+                                            {{ zimer.TypeZim }}
+                                        </div>
+                                    </div>
+                                    <div class="p-4 pb-0">
+                                        <h5 class="text-primary mb-3">${{ zimer.MidweekPrice }}</h5>
+                                        <a class="d-block h5 mb-2" href="/zimmer/{{ zimer.id }}">{{ zimer.NameZim }}</a>
+                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ zimer.LocationZim }}</p>
+                                    </div>
+                                    <div class="d-flex border-top">
+                                        <small class="flex-fill text-center border-end py-2">
+                                            <i class="fa fa-phone text-primary me-2"></i>{{ zimer.Phone }}
+                                        </small>
+                                        <small class="flex-fill text-center border-end py-2">
+                                            <i class="fa fa-swimmer text-primary me-2"></i>{{ 'Yes' if zimer.IsPool else 'No' }}
+                                        </small>
+                                        <small class="flex-fill text-center py-2">
+                                            <i class="fa fa-hot-tub text-primary me-2"></i>{{ 'Yes' if zimer.IsJacuzzi else 'No' }}
+                                        </small>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="d-flex border-top">
-                                <small class="flex-fill text-center border-end py-2">
-                                    <i class="fa fa-phone text-primary me-2"></i>{{ zimer.Phone }}
-                                </small>
-                                <small class="flex-fill text-center border-end py-2">
-                                    <i class="fa fa-swimmer text-primary me-2"></i>{{ 'Yes' if zimer.IsPool else 'No' }}
-                                </small>
-                                <small class="flex-fill text-center py-2">
-                                    <i class="fa fa-hot-tub text-primary me-2"></i>{{ 'Yes' if zimer.IsJacuzzi else 'No' }}
-                                </small>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
-                    {% endfor %}
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<!-- Property List End -->
-
-
-
-
-
+        <!-- Property List End -->
 
 
         <!-- Footer Start -->

@@ -27,7 +27,7 @@ def get_all_zimers():
                     "TypeZim": row[5],
                     "Phone": row[6],
                     "IMG": row[7]
-                })
+                }) #.fromat(*row)
 
             return zimers_list
 

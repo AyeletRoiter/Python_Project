@@ -42,7 +42,7 @@
         <!-- Spinner End -->
 
 
-        <!-- Menu Page -->
+         <!-- Menu Page -->
         <div class="container-fluid nav-bar bg-transparent">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
 
@@ -61,35 +61,12 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <!--This div responsible for the link to another page-->
                         <div class="navbar-nav ms-auto">
-
-                            <!--home link: -->
                                 <a href="index.html" class="nav-item nav-link">Home</a>
-
-                            <!--about link: -->
                                 <a href="about.html" class="nav-item nav-link active">About</a>
-
-                            <!--Zimmer and LandLords links: -->
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">More Details</a>
-                                    <div class="dropdown-menu rounded-0 m-0">
-                                        <a href="property-list.html" class="dropdown-item">All Zimmer</a>
-                                        <a href="property-type.html" class="dropdown-item">Type Zimmer</a>
-                                        <a href="property-agent.html" class="dropdown-item">LandLords</a>
-                                    </div>
-                                </div>
-
-                            <!--div pages-->
-                                <div class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                                    <div class="dropdown-menu rounded-0 m-0">
-                                        <a href="testimonial.html" class="dropdown-item">Customers Respond</a>
-                                        <a href="404.html" class="dropdown-item">404 Error</a>
-                                    </div>
-                                </div>
-
-                            <!--Contact Page-->
+                                <a href="property-list.html" class="nav-item nav-link">Zimmer</a>
+                                <a href="property-agent.html" class="nav-item nav-link">LandLords</a>
+                                <a href="testimonial.html" class="nav-item nav-link">Ratings</a>
                                 <a href="account.html" class="nav-item nav-link">account</a>
-
                         </div>
                     <!--close the links div-->
 
@@ -103,6 +80,38 @@
             </nav>
         </div>
         <!-- Menu End -->
+        <!-- Home Page -->
+        <div class="container-fluid header bg-white p-0">
+    <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+
+        <!-- This div is responsible for the title of the page-->
+        <div class="col-md-6 p-5 mt-lg-5">
+            <!-- Greeting with username -->
+            <!-- Title in the Home Page -->
+            <h1 class="display-5 animated fadeIn mb-4">Find A <span class="text-primary">Perfect Zimmer</span> vacation with your family</h1>
+            <p class="animated fadeIn mb-4 pb-2">
+                On our website you can find the perfect B&B for you according to the parameters that are convenient for you and at prices within your range, everything is for you
+            </p>
+            <!-- Link to Zimmer List Page-->
+            <a href="property-list.html" class="btn btn-primary py-3 px-5 me-3 animated fadeIn">Get Started</a>
+        </div>
+        <!-- Close the title div-->
+
+        <!-- This div is responsible for the image on the side-->
+        <div class="col-md-6 animated fadeIn">
+            <div class="owl-carousel header-carousel">
+                <div class="owl-carousel-item">
+                    <img class="img-fluid" src="img/carousel-1.jpg" alt="">
+                </div>
+                <div class="owl-carousel-item">
+                    <img class="img-fluid" src="img/carousel-2.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <!-- Close the image div-->
+
+    </div>
+</div>
 
        <!-- About Start -->
         <div class="container-xxl py-5">
@@ -130,81 +139,29 @@
 
 
         <!-- Team Start -->
-        <div class="container-xxl py-5">
-            <div class="container">
-                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                    <h1 class="mb-3">Property Agents</h1>
-                    <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="team-item rounded overflow-hidden">
-                            <div class="position-relative">
-                                <img class="img-fluid" src="img/team-1.jpg" alt="">
-                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">Full Name</h5>
-                                <small>Designation</small>
-                            </div>
-                        </div>
+            <div class="container-xxl py-5">
+                <div class="container">
+                    <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                        <h1 class="mb-3">List of our landlords 🙂</h1>
                     </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="team-item rounded overflow-hidden">
-                            <div class="position-relative">
-                                <img class="img-fluid" src="img/team-2.jpg" alt="">
-                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                    <div class="row g-4">
+                        {% for Land in Land_list %}
+                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="property-item rounded overflow-hidden">
+                                    <div class="p-4 pb-0">
+                                        <a class="d-block h5 mb-2" href="#">{{ Land.NameLand }}</a>
+                                        <h7 class="text-primary mb-3">
+                                            <i class="fa fa-phone text-primary me-2"></i>{{ Land.PhoneLand }}
+                                        </h7>
+                                        <p><i class="fa fa-envelope text-primary me-2"></i>{{ Land.EmailLand }}</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">Full Name</h5>
-                                <small>Designation</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="team-item rounded overflow-hidden">
-                            <div class="position-relative">
-                                <img class="img-fluid" src="img/team-3.jpg" alt="">
-                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">Full Name</h5>
-                                <small>Designation</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                        <div class="team-item rounded overflow-hidden">
-                            <div class="position-relative">
-                                <img class="img-fluid" src="img/team-4.jpg" alt="">
-                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">Full Name</h5>
-                                <small>Designation</small>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Team End -->
+            <!-- Team End -->
         
 
         <!-- Footer Start -->
