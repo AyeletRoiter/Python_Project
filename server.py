@@ -17,7 +17,7 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 # Login Page - Route and function
 @app.route('/Login.html')
 def login():
-    return render_template('Login.html')  # Assuming you have a login.html template
+    return render_template('Login.html')  
 
 # Handling Login Form Submission
 @app.route('/Login.html', methods=['POST'])
